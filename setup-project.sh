@@ -19,7 +19,7 @@ pip install --upgrade pip
 echo "Installing Requirements..."
 pip install -r requirements.txt
 
-# pip freeze > requirements.txt
+# pip freeze > requirements.txt 
 
 echo "Done! Virtual environment is set up and ready."
 echo "To activate it later: source ${VENV_DIR}/bin/activate"
