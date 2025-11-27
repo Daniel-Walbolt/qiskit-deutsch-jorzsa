@@ -30,27 +30,27 @@
 
     We executed the circuits on a noise-free simulator (AerSimulator) with 1024 shots. The results conclusively demonstrate the algorithm's deterministic nature.
 
-    Case 1: Constant Function Analysis
+    Case 1: Constant Function
 
-    For the constant function test, we expected constructive interference to amplify the probability amplitude of the all-zero state $\ket{00\dots0}$.
+    For the constant function test, we expected constructive interference to amplify the probability of the all-zero state (e.g. $\ket{000}$).
 
     ![Fig 1 gates](image.png)
     ![Fig 1 graph](image-1.png)
 
-    Figure 1: Measurement results for a 2-qubit Constant Oracle.
+    Figure 1: Measurement results for a 3-qubit Constant Oracle.
 
-    Observation: As shown in Figure 1, the system measured the state 00 (all zeros) with a probability of 1.0 (1024/1024 shots). This confirms that the algorithm correctly identifies a constant function by converging on the zero state.
+    Observation: As shown in Figure 1, the system measured the state 000 with a probability of 1.0 (1024/1024 iterations). This confirms that the algorithm correctly identifies a constant function by converging on the zero state.
 
     Case 2: Balanced Function Analysis
 
-    For the balanced function test, we expected destructive interference to completely cancel out the amplitude of the $\ket{00\dots0}$ state, transferring the probability to orthogonal states.
+    For the balanced function test, we expected destructive interference to cancel out the amplitude of the all-zero state and increase the probability of orthogonal states.
 
     ![Fig 2 gates](image-2.png)
     ![Fig 2 graph](image-3.png)
 
-    Figure 2: Measurement results for a 2-qubit Balanced Oracle (Parity).
+    Figure 2: Measurement results for a 3-qubit Balanced Oracle (Parity).
 
-    Observation: As shown in Figure 2, the system measured the state 11 (non-zero) with a probability of 1.0. Since the result is not 00, the algorithm correctly identifies the function as Balanced.
+    Observation: As shown in Figure 2, the system measured the state 111 with a probability of 1.0. Since the result is not 000, the algorithm correctly identifies the function as Balanced.
 
 4. Complexity Analysis: Quantum vs. Classical
 
@@ -62,12 +62,12 @@
     | :--- | :--- | :--- |
     | **Query Method** | Must check inputs sequentially (one by one). | Evaluates $f(x)$ for all $2^n$ inputs simultaneously using superposition. |
     | **Worst Case Queries** | $2^{n-1} + 1$ | **1** |
-    | **For n=3 Qubits** | Requires $2^{3-1} + 1 = \mathbf{5}$ queries. | Requires **1** query. |
+    | **For n=3** | Requires $2^{3-1} + 1 = \mathbf{5}$ queries. | Requires **1** query. |
     | **Scaling** | Exponential time $O(2^n)$. | Constant time $O(1)$. |
 
     Mathematical Derivation
 
-    In the classical worst-case scenario, if we check $2^{n-1}$ inputs (half the possibilities) and they all return the same value (e.g., 0), we still cannot be certain the function is constant. The very next input could return 1, making it balanced. Therefore, we must check $2^{n-1} + 1$ inputs to know for sure.
+    In the classical worst-case scenario, if we check $2^{n-1}$ inputs (half the possibilities) and they all return the same value (e.g. 0), we still cannot be certain the function is constant. The very next input could return 1, making the oracle balanced. Therefore, we must check $2^{n-1} + 1$ inputs to know for sure.
 
     In the quantum scenario, the Deutsch-Jozsa algorithm leverages interference. The amplitude of the $\ket{0}^{\otimes n}$ state after the final Hadamard transformation is given by:
 
